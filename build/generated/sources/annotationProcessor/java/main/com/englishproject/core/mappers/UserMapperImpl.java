@@ -1,20 +1,20 @@
 package com.englishproject.core.mappers;
 
 import com.englishproject.core.dto.RoleDTO;
-import com.englishproject.core.dto.RoleDTO.RoleDTOBuilder;
 import com.englishproject.core.dto.UserDTO;
-import com.englishproject.core.dto.UserDTO.UserDTOBuilder;
 import com.englishproject.core.model.Role;
 import com.englishproject.core.model.User;
 import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.Generated;
+import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-03-11T17:37:42+0300",
+    date = "2021-03-12T16:05:59+0300",
     comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-6.8.3.jar, environment: Java 11.0.3 (JetBrains s.r.o)"
 )
+@Component
 public class UserMapperImpl implements UserMapper {
 
     @Override
@@ -23,14 +23,14 @@ public class UserMapperImpl implements UserMapper {
             return null;
         }
 
-        UserDTOBuilder userDTO = UserDTO.builder();
+        UserDTO userDTO = new UserDTO();
 
-        userDTO.id( user.getId() );
-        userDTO.email( user.getEmail() );
-        userDTO.password( user.getPassword() );
-        userDTO.roles( roleSetToRoleDTOSet( user.getRoles() ) );
+        userDTO.setId( user.getId() );
+        userDTO.setEmail( user.getEmail() );
+        userDTO.setPassword( user.getPassword() );
+        userDTO.setRoles( roleSetToRoleDTOSet( user.getRoles() ) );
 
-        return userDTO.build();
+        return userDTO;
     }
 
     protected RoleDTO roleToRoleDTO(Role role) {
@@ -38,12 +38,12 @@ public class UserMapperImpl implements UserMapper {
             return null;
         }
 
-        RoleDTOBuilder roleDTO = RoleDTO.builder();
+        RoleDTO roleDTO = new RoleDTO();
 
-        roleDTO.id( role.getId() );
-        roleDTO.name( role.getName() );
+        roleDTO.setId( role.getId() );
+        roleDTO.setName( role.getName() );
 
-        return roleDTO.build();
+        return roleDTO;
     }
 
     protected Set<RoleDTO> roleSetToRoleDTOSet(Set<Role> set) {
